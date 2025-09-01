@@ -16,6 +16,7 @@ dependencies:
   flutter_native_splash: ^2.4.6
   geolocator: ^14.0.2
   http: ^1.5.0
+  flutter_spinkit: ^5.2.2
 
 dev_dependencies:
   flutter_test:
@@ -36,11 +37,11 @@ flutter:
       weight: 900
  
 flutter_native_splash:
-  color: "#ffc1cc"
+  color: "#f4e4e5"
   image: images/splash.png
   android: true
   ios: true
 
   android_12:
-    color: "#ffc1cc"
+    color: "#f4e4e5"
     image: images/splash.png

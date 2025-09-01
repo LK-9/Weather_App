@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:weather/services/location.dart';
-import 'package:http/http.dart';
+import 'package:weather/screens/location_screen.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:weather/services/weather.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -14,31 +15,26 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-    getLocation();
+    getLocationData();
   }
 
-  void getLocation() async {
-    Location location = Location();
-    await location.getCurrentLocation();
-    print(location.latitude);
-    print(location.longitude);
+  void getLocationData() async {
+    var weatherData = await WeatherModel().getLocationWeather();
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return LocationScreen(locationWeather: weatherData);
+        },
+      ),
+    );
   }
-
-  // void getData(){
-  //   get(url)
-  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: FilledButton(
-          onPressed: () {
-            // Manually trigger location fetch
-            getLocation();
-          },
-          child: const Text('Get Location'),
-        ),
+        child: SpinKitDoubleBounce(color: Colors.white, size: 100.0),
       ),
     );
   }
